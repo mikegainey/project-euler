@@ -40,33 +40,35 @@ end
 4. for each key in factor dict, update output dict as needed
 """
 function euler(n)
-    output = Dict()
+    outdict = Dict()
     for x in 2:n
         # make the factor dict for x
         xdict = Dict()
         for factor in pfactors(x)
             xdict[factor] = get(xdict, factor, 0) + 1
         end
-        # make and update the output dict from each xfactor dict
+        # make and update the outdict dict from each xfactor dict
         for (factor, frequency) in xdict
-            if factor ∉ keys(output)
-                output[factor] = frequency
-            elseif output[factor] < frequency
-                output[factor] = frequency
+            if factor ∉ keys(outdict)
+                outdict[factor] = frequency
+            elseif outdict[factor] < frequency
+                outdict[factor] = frequency
             end
         end
     end
-    result :: Array{Int} = []
-    for (factor, frequency) in output
+    # dump outdict into the outlist array to be sorted and multiplied out
+    outlist :: Array{Int} = []
+    for (factor, frequency) in outdict
         for i in 1:frequency
-            push!(result, factor)
+            push!(outlist, factor)
         end
     end
-    return sort(result), prod(result)
+    return sort(outlist), prod(outlist)
 end
 
 function test()
-    @show(euler(10))
-    @show(euler(20))
+    for n in 2:20
+    println("euler($n) = ", euler(n))
+    end
     nothing
 end
