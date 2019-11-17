@@ -56,11 +56,22 @@ function euler()
     20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
     01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48
     """
+    # create the grid array
     lines = split(input, '\n')
     grid = []
     for line in lines
-        push!(grid, split(line, ' '))
+        push!(grid, [parse(Int64, x) for x in split(line)])
     end
-    lines
+    grid
+    # search the grid: vertical groups of four
+    # for row in 1:20
+    #     for col in 1:17
+    #         group = []
+    #         for rowoffset in 0:3
+    #             push!(group, grid[row + rowoffset][col])
+    #         end
+    #         @show group
+    #         readline()
+    #     end
+    # end
 end
-
